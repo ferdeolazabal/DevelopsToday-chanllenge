@@ -4,12 +4,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Overview
 
-This application allows users to select a car brand and model from dropdown menus on the main page. After selecting the car brand and model, users are redirected to a new page where they can view all available versions of the selected model along with their IDs.
+This application allows users to select a car brand and year from dropdown menus on the main page. After selecting the car brand and year, users are redirected to a new page where they can view all available versions of the selected year along with their IDs.
 
 ## Features
 
--   **Car Make and Model Selection**: Users can choose a car brand and model from dropdown lists.
--   **Display Versions**: After selecting a model, users are redirected to a page displaying all versions of the chosen model, including their IDs.
+-   **Car Make and Model Selection**: Users can choose a car brand and year from dropdown lists.
+-   **Display Versions**: After selecting a car brand and year, users are redirected to a page displaying all versions of the chosen brand, including their IDs.
 
 ## Architecture
 
