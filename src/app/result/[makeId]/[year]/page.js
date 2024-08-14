@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
+import VehicleModelList from './VehicleModelList';
 
 async function generateStaticParams(makeId, year) {
     const res = await fetch(
@@ -12,16 +13,6 @@ async function generateStaticParams(makeId, year) {
 }
 
 export default async function ResultPage({ params }) {
-    let vehicleModels = [];
-    let error = null;
-
-    try {
-        const data = await generateStaticParams(params.makeId, params.year);
-        vehicleModels = data.Results;
-    } catch (e) {
-        error = e.message;
-    }
-
     return (
         <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
@@ -35,24 +26,9 @@ export default async function ResultPage({ params }) {
                         </p>
                     </div>
                     <div className="border-t border-gray-200">
-                        {error ? (
-                            <p className="text-red-500 p-4">{error}</p>
-                        ) : (
-                            <ul className="divide-y divide-gray-200">
-                                {vehicleModels.map((model, index) => (
-                                    <Suspense key={index} fallback={<div>Loading...</div>}>
-                                        <li className="px-4 py-4 sm:px-6">
-                                            <div className="text-sm font-medium text-indigo-600">
-                                                {model.Model_Name}
-                                            </div>
-                                            <div className="mt-1 text-sm text-gray-500">
-                                                ID: {model.Model_ID}
-                                            </div>
-                                        </li>
-                                    </Suspense>
-                                ))}
-                            </ul>
-                        )}
+                        <Suspense fallback={<LoadingSpinner />}>
+                            <VehicleModelList makeId={params.makeId} year={params.year} />
+                        </Suspense>
                     </div>
                 </div>
                 <div className="mt-6">
@@ -63,6 +39,14 @@ export default async function ResultPage({ params }) {
                     </Link>
                 </div>
             </div>
+        </div>
+    );
+}
+
+function LoadingSpinner() {
+    return (
+        <div className="flex justify-center items-center p-8">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
         </div>
     );
 }
