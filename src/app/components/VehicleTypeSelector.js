@@ -13,7 +13,9 @@ async function fetchVehicleTypes() {
     return data.Results;
 }
 
-export default function VehicleTypeSelector({ currentYear, onSubmit }) {
+export default function VehicleTypeSelector({ onSubmit }) {
+    const currentYear = new Date().getFullYear();
+
     const [vehicleTypes, setVehicleTypes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedType, setSelectedType] = useState('');
