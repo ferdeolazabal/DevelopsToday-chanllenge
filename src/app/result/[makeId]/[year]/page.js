@@ -2,16 +2,6 @@ import React, { Suspense } from 'react';
 import Link from 'next/link';
 import VehicleModelList from './VehicleModelList';
 
-async function generateStaticParams(makeId, year) {
-    const res = await fetch(
-        `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/${makeId}/modelyear/${year}?format=json`
-    );
-    if (!res.ok) {
-        throw new Error('Failed to fetch vehicle models');
-    }
-    return res.json();
-}
-
 export default async function ResultPage({ params }) {
     return (
         <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
